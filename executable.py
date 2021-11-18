@@ -1,10 +1,16 @@
 from web_control import web_controller
 import time
+import json
+
+# user id 와 user pw를 저장한 파일
+with open('user.json') as f:
+    data = json.load(f)
 
 process = web_controller()
 
-user = ''
-pw = ''
+user = data['id']
+pw = data['pw']
+
 login_url = 'https://sitc2021.onlineeventpro.freeman.com/login'
 poster_url = 'https://sitc2021.onlineeventpro.freeman.com/posters'
 join_url = 'https://sitc2021.onlineeventpro.freeman.com'

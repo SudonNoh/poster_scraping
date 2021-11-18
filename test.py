@@ -9,6 +9,12 @@ import pyautogui
 import pyperclip
 from bs4 import BeautifulSoup
 
+import json
+
+# user id 와 user pw를 저장한 파일
+with open('user.json') as f:
+    data = json.load(f)
+
 chrome_service = Service(ChromeDriverManager().install())
 options = webdriver.ChromeOptions()
 options.add_argument('window-size=1920,1080')
@@ -20,8 +26,8 @@ driver.implicitly_wait(5)
 
 driver.get(url='https://sitc2021.onlineeventpro.freeman.com/login')
 
-user = ''
-pw = ''
+user = data['id']
+pw = data['pw']
 
 elem = driver.find_element(By.ID, "email-address")
 elem.send_keys(user)
@@ -33,15 +39,27 @@ driver.get(url='https://sitc2021.onlineeventpro.freeman.com/posters')
 time.sleep(5)
 html = driver.page_source
 soup = BeautifulSoup(html, "html.parser")
-y = soup.find_all('h2', {'class': 'poster-card_posterTitle__1v0C4'})
-count = 0
-for i in y:
-    count += 1
-    print(count)
-    if not i("span"):
-        print(i.text)
-    else:
+
+# title 및 number 추출
+x = soup.find_all('div', {'class': 'poster-card_posterCard__14waB'})
+for i in x:
+    print(i("p")[0].text)
+    try:
         print(i("span")[0]["title"])
+    except KeyError:
+        print(i("h2")[0].text)
+
+
+# title 및 번호 추출
+# y = soup.find_all('h2', {'class': 'poster-card_posterTitle__1v0C4'})
+# count = 0
+# for i in y:
+#     count += 1
+#     print(count)
+#     if not i("span"):
+#         print(i.text)
+#     else:
+#         print(i("span")[0]["title"])
 
 
 print(soup.find_all('a', {'class': 'poster-card_outerHolder__1Hw6u card-wrapper_holder__3I_E0'}))

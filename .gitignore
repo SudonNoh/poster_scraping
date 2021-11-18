@@ -9,6 +9,7 @@ data/
 .vscode/
 SignalP_file2.xlsx
 *.xlsx
+*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
