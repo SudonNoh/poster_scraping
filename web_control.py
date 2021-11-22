@@ -121,7 +121,7 @@ class web_controller:
             pass
 
         # 확인버튼 클릭
-        time.sleep(2)
+        time.sleep(10)
         pyautogui.moveTo(1481, 908)
         pyautogui.click()
 
@@ -134,19 +134,19 @@ class web_controller:
             pass
 
         # 제목 변경 위치까지 이동
-        time.sleep(2)
+        time.sleep(5)
         pyautogui.moveTo(231, 448)
         pyautogui.click()
 
         # 제목 변경
-        time.sleep(2)
+        time.sleep(5)
         pyautogui.hotkey('ctrl', 'a')
         pyautogui.press('delete')
         pyperclip.copy(file_name + '.pdf')
         pyautogui.hotkey('ctrl', 'v')
 
         # 저장
-        time.sleep(3)
+        time.sleep(5)
         pyautogui.moveTo(1071, 511)
         pyautogui.click()
         # 저장하는데, 시간이 필요함
