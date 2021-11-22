@@ -59,6 +59,7 @@ export_excel.to_excel(filepath)
 print("PDF 저장을 시작합니다.")
 count = 0
 for i in data_frame_list:
+    process.time_sleep = 3
     for j in range(3):
         file_list = os.listdir("C:/Users/SD NOH/Desktop/pdf")
         if i[0]+".pdf" in file_list:
@@ -71,6 +72,8 @@ for i in data_frame_list:
                 process = web_controller()
                 time.sleep(3)
                 process.login(user, pw, login_url)
+                process.time_sleep = 10
+                count = 0
             else:
                 pass
             process.get_url(i[2])

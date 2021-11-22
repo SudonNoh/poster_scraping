@@ -20,6 +20,7 @@ class web_controller:
         self.options.add_argument('window-size=1920,1080')
         self.driver = webdriver.Chrome(service=self.chrome_service, options=self.options)
         self.driver.implicitly_wait(5)
+        self.time_sleep = 3
 
     def login(self, user_id, user_pw, url):
         self.driver.get(url=url)
@@ -109,48 +110,48 @@ class web_controller:
     def print_window(self, file_name, count):
         if count == 0:
             # PDF dropdown 선택
-            time.sleep(1)
+            time.sleep(self.time_sleep)
             pyautogui.moveTo(1500, 165)
             pyautogui.click()
 
             # PDF로 변환 선택
-            time.sleep(1)
+            time.sleep(self.time_sleep)
             pyautogui.moveTo(1500, 220)
             pyautogui.click()
         else:
             pass
 
         # 확인버튼 클릭
-        time.sleep(10)
+        time.sleep(self.time_sleep)
         pyautogui.moveTo(1481, 908)
         pyautogui.click()
 
         if count == 0:
             # 저장 위치 변경
-            time.sleep(1)
+            time.sleep(self.time_sleep)
             pyautogui.moveTo(98, 196)
             pyautogui.click()
         else:
             pass
 
         # 제목 변경 위치까지 이동
-        time.sleep(5)
+        time.sleep(self.time_sleep + 1)
         pyautogui.moveTo(231, 448)
         pyautogui.click()
 
         # 제목 변경
-        time.sleep(5)
+        time.sleep(self.time_sleep + 1)
         pyautogui.hotkey('ctrl', 'a')
         pyautogui.press('delete')
         pyperclip.copy(file_name + '.pdf')
         pyautogui.hotkey('ctrl', 'v')
 
         # 저장
-        time.sleep(5)
+        time.sleep(self.time_sleep + 1)
         pyautogui.moveTo(1071, 511)
         pyautogui.click()
         # 저장하는데, 시간이 필요함
-        time.sleep(3)
+        time.sleep(self.time_sleep + 1)
 
     def driver_shutdown(self):
         self.driver.quit()
